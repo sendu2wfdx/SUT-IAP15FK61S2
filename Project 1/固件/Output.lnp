@@ -1,3 +1,0 @@
-".\¹Ì¼þ\main.obj" 
-TO ".\¹Ì¼þ\Output" 
-PRINT(".\Listings\Output.m51") RAMSIZE(256) 

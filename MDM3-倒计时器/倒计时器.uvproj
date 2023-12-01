@@ -7,7 +7,7 @@
 
   <Targets>
     <Target>
-      <TargetName>Target 1</TargetName>
+      <TargetName>单片机课设</TargetName>
       <ToolsetNumber>0x0</ToolsetNumber>
       <ToolsetName>MCS-51</ToolsetName>
       <uAC6>0</uAC6>
@@ -46,13 +46,13 @@
             <InvalidFlash>1</InvalidFlash>
           </TargetStatus>
           <OutputDirectory>.\固件\</OutputDirectory>
-          <OutputName>Output</OutputName>
+          <OutputName>倒计时器</OutputName>
           <CreateExecutable>1</CreateExecutable>
           <CreateLib>0</CreateLib>
           <CreateHexFile>1</CreateHexFile>
           <DebugInformation>1</DebugInformation>
           <BrowseInformation>1</BrowseInformation>
-          <ListingPath>.\Listings\</ListingPath>
+          <ListingPath>.\固件\</ListingPath>
           <HexFormatSelection>0</HexFormatSelection>
           <Merge32K>0</Merge32K>
           <CreateBatchFile>0</CreateBatchFile>
@@ -374,12 +374,27 @@
       </TargetOption>
       <Groups>
         <Group>
-          <GroupName>Source Group 1</GroupName>
+          <GroupName>倒计时器</GroupName>
           <Files>
             <File>
               <FileName>main.c</FileName>
               <FileType>1</FileType>
               <FilePath>.\main.c</FilePath>
+            </File>
+            <File>
+              <FileName>Display.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Display.C</FilePath>
+            </File>
+            <File>
+              <FileName>CH452W4.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\CH452W4.C</FilePath>
+            </File>
+            <File>
+              <FileName>Delay.C</FileName>
+              <FileType>1</FileType>
+              <FilePath>.\Delay.C</FilePath>
             </File>
           </Files>
         </Group>
