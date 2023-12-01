@@ -1,0 +1,91 @@
+C51 COMPILER V9.60.0.0   KEYSCAN                                                           08/24/2022 20:01:29 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE KEYSCAN
+OBJECT MODULE PLACED IN .\Objects\Keyscan.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE Keyscan.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\K
+                    -eyscan.lst) TABS(2) OBJECT(.\Objects\Keyscan.obj)
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          #include <Keyscan.h>
+   3          #include <Delay.h>
+   4          
+   5          extern unsigned char k;   //键值
+   6          extern unsigned char flag;    //按键状态
+   7          
+   8          //按键扫描函数
+   9          void keyscan(void)
+  10          {
+  11   1        unsigned char a;  //键值暂存
+  12   1        P1=0Xf0;
+  13   1        if(P1!=0xf0)  //有按键按下
+  14   1        {
+  15   2          delayms(50);
+  16   2          if(P1!=0xf0)  //延时消抖
+  17   2          {
+  18   3            P1=0xfe;  //P14低电平
+  19   3      //      delayms(50);
+  20   3      
+  21   3            //开始行列扫描
+  22   3            a=P1;   //缓存
+  23   3            switch(a)
+  24   3            {
+  25   4              case 0xee:  k=15;flag=1; break;
+  26   4              case 0xde:  k=11;flag=1; break;
+  27   4              case 0xbe:  k=7;flag=1; break;
+  28   4              case 0x7e:  k=3;flag=1; break;
+  29   4              default:  P1=0xfd;  //P15低电平
+  30   4        
+  31   4              a=P1;
+  32   4              switch(a)
+  33   4              {
+  34   5                case 0xed:  k=14;flag=1; break;
+  35   5                case 0xdd:  k=10;flag=1; break;
+  36   5                case 0xbd:  k=6;flag=1; break;
+  37   5                case 0x7d:  k=2;flag=1; break;
+  38   5                default:  P1=0xfb;  //P16低电平
+  39   5        
+  40   5                a=P1;
+  41   5                switch(a)
+  42   5                {
+  43   6                  case 0xeb:  k=13;flag=1; break;
+  44   6                  case 0xdb:  k=9;flag=1; break;
+  45   6                  case 0xbb:  k=5;flag=1; break;
+  46   6                  case 0x7b:  k=1;flag=1; break;
+  47   6                  default:  P1=0xf7;  //P17低电平
+  48   6          
+  49   6                  a=P1;
+  50   6                  switch(a)
+  51   6                  {
+  52   7                    case 0xe7:  k=12;flag=1; break;
+  53   7                    case 0xd7:  k=8;flag=1; break;
+  54   7                    case 0xb7:  k=4;flag=1; break;
+C51 COMPILER V9.60.0.0   KEYSCAN                                                           08/24/2022 20:01:29 PAGE 2   
+
+  55   7                    case 0x77:  k=0;flag=1; break;
+  56   7                    default:  break;
+  57   7      
+  58   7                  }
+  59   6                } 
+  60   5              }
+  61   4              break;
+  62   4            }
+  63   3          }
+  64   2        }
+  65   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    201    ----
+   CONSTANT SIZE    =   ----    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =   ----    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

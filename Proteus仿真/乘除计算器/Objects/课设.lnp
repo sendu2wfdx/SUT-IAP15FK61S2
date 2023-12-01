@@ -1,0 +1,7 @@
+".\Objects\main.obj",
+".\Objects\Keyscan.obj",
+".\Objects\Smg.obj",
+".\Objects\Delay.obj",
+".\Objects\UART.obj" 
+TO ".\Objects\øŒ…Ë" 
+PRINT(".\Listings\øŒ…Ë.m51")

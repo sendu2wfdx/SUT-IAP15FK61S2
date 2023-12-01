@@ -1,0 +1,144 @@
+C51 COMPILER V9.60.0.0   MAIN                                                              08/24/2022 20:01:28 PAGE 1   
+
+
+C51 COMPILER V9.60.0.0, COMPILATION OF MODULE MAIN
+OBJECT MODULE PLACED IN .\Objects\main.obj
+COMPILER INVOKED BY: C:\Keil_v5\C51\BIN\C51.EXE main.c OPTIMIZE(8,SPEED) BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\main
+                    -.lst) TABS(2) OBJECT(.\Objects\main.obj)
+
+line level    source
+
+   1          #include <REGX51.H>
+   2          #include <Keyscan.h>
+   3          #include <Smg.h>
+   4          #include <Delay.h>
+   5          #include <UART.h>
+   6          
+   7          
+   8          unsigned char k=16;   //键值
+   9          unsigned char flag=0;   //按键状态
+  10          int temp=0,num1=0,num2=0,op=0;
+  11          
+  12          //主函数
+  13          void main(void)
+  14          {
+  15   1        UartInit(); //初始化串口
+  16   1        EA = 1;     //开总中断
+  17   1        ES=1;   //打开串口中断
+  18   1        while(1)
+  19   1        {
+  20   2          if(temp>999)
+  21   2          {
+  22   3            flag=0;
+  23   3            Alert();
+  24   3            temp=0;
+  25   3          }
+  26   2          else
+  27   2          if(k==14) //key "="
+  28   2          {
+  29   3            uart1_sendstring("Key '=' is pressed!\r\n");
+  30   3            switch(op)
+  31   3            {
+  32   4              case 1:   num2=num1/temp; temp=num2; op=0;  break;
+  33   4              case 2:   num2=num1*temp; temp=num2; op=0;  break;
+  34   4      //        case 3:   num2=num1-temp; temp=num2; op=0;  break;
+  35   4      //        case 4:   num2=num1+temp; temp=num2; op=0;  break;
+  36   4              default:  op=0; break;
+  37   4            }     
+  38   3            delayms(200);
+  39   3            k=16;
+  40   3            flag=0;
+  41   3          }
+  42   2          else
+  43   2          Display(temp);
+  44   2          if(flag)  //有按键按下
+  45   2          {
+  46   3            if(k==12) //key "CE"
+  47   3            {
+  48   4              uart1_sendstring("Key 'CE' is pressed!\r\n");
+  49   4              temp=0;num1=0;num2=0;
+  50   4              delayms(200);
+  51   4              flag=0;
+  52   4            }
+  53   3            if(k==3)  //key "%"
+  54   3            {
+C51 COMPILER V9.60.0.0   MAIN                                                              08/24/2022 20:01:28 PAGE 2   
+
+  55   4              uart1_sendstring("Key '%' is pressed!\r\n");
+  56   4              op=1;
+  57   4              num1=temp;
+  58   4              temp=0;
+  59   4              delayms(200);
+  60   4              flag=0;
+  61   4            }     
+  62   3            if(k==7)  //key "x"
+  63   3            {
+  64   4              uart1_sendstring("Key 'x' is pressed!\r\n");
+  65   4              op=2;
+  66   4              num1=temp;
+  67   4              temp=0;
+  68   4              delayms(200);
+  69   4              flag=0;
+  70   4            }     
+  71   3      //      if(k==11) //key "-"
+  72   3      //      {
+  73   3      //        uart1_sendstring("Key '-' is pressed!\r\n");
+  74   3      //        op=3;
+  75   3      //        num1=temp;
+  76   3      //        temp=0;
+  77   3      //        delayms(200);
+  78   3      //        flag=0;
+  79   3      //      }     
+  80   3      //      if(k==15) //key "+"
+  81   3      //      {
+  82   3      //        uart1_sendstring("Key '+' is pressed!\r\n");
+  83   3      //        op=4;
+  84   3      //        num1=temp;
+  85   3      //        temp=0;
+  86   3      //        delayms(200);
+  87   3      //        flag=0;
+  88   3      //      }
+  89   3            switch(k)
+  90   3            {
+  91   4              case 0: uart1_sendstring("Key '7' is pressed!\r\n");  temp=temp*10+7; delayms(200); flag=0; break;  //ke
+             -y  "7"
+  92   4              case 1: uart1_sendstring("Key '8' is pressed!\r\n");  temp=temp*10+8; delayms(200); flag=0; break;  //ke
+             -y  "8"
+  93   4              case 2: uart1_sendstring("Key '9' is pressed!\r\n");  temp=temp*10+9; delayms(200); flag=0; break;  //ke
+             -y  "9"
+  94   4              case 4: uart1_sendstring("Key '4' is pressed!\r\n");  temp=temp*10+4; delayms(200); flag=0; break;  //ke
+             -y  "4"
+  95   4              case 5: uart1_sendstring("Key '5' is pressed!\r\n");  temp=temp*10+5; delayms(200); flag=0; break;  //ke
+             -y  "5"
+  96   4              case 6: uart1_sendstring("Key '6' is pressed!\r\n");  temp=temp*10+6; delayms(200); flag=0; break;  //ke
+             -y  "6"
+  97   4              case 8: uart1_sendstring("Key '1' is pressed!\r\n");  temp=temp*10+1; delayms(200); flag=0; break;  //ke
+             -y  "1"
+  98   4              case 9: uart1_sendstring("Key '2' is pressed!\r\n");  temp=temp*10+2; delayms(200); flag=0; break;  //ke
+             -y  "2"
+  99   4              case 10:  uart1_sendstring("Key '3' is pressed!\r\n");  temp=temp*10+3; delayms(200); flag=0; break;  //k
+             -ey  "3"
+ 100   4              case 13:  uart1_sendstring("Key '0' is pressed!\r\n");  temp=temp*10+0; delayms(200); flag=0; break;  //k
+             -ey  "0"
+ 101   4              default:  break;
+ 102   4            }
+ 103   3          }
+ 104   2          else  keyscan();
+ 105   2        }
+ 106   1      }
+C51 COMPILER V9.60.0.0   MAIN                                                              08/24/2022 20:01:28 PAGE 3   
+
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    559    ----
+   CONSTANT SIZE    =    309    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     10    ----
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
